@@ -185,18 +185,79 @@ public class Main {
                 "</html>";
         final JLabel label = new JLabel(formattedText);
 
+        // Buttons panel
+        final JPanel buttonsPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+
+        final JButton editButton = new JButton("Edit");
         final JButton deleteButton = new JButton("Delete");
 
-        deleteButton.addActionListener(e -> {
-            entries.remove(entry);
-            listPanel.remove(entryPanel);
-            listPanel.revalidate();
-            listPanel.repaint();
-            saveData();
+        editButton.setPreferredSize(new Dimension(100, 30));
+        deleteButton.setPreferredSize(new Dimension(100, 30));
+
+        // Edit button action
+        editButton.addActionListener(e -> {
+            final JTextField nameField = new JTextField(entry.name);
+            final JTextField descriptionField = new JTextField(entry.description);
+            final JTextField websiteField = new JTextField(entry.website);
+
+            final Object[] message = {
+                    "Name:", nameField,
+                    "Description:", descriptionField,
+                    "Website:", websiteField
+            };
+
+            final int option = JOptionPane.showConfirmDialog(null, message, "Edit Entry", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                // Validate website
+                if (!websiteField.getText().startsWith("https://")) {
+                    JOptionPane.showMessageDialog(
+                            null, "The website must start with https://", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Update entry
+                entry.name = nameField.getText().trim();
+                entry.description = descriptionField.getText().trim();
+                entry.website = websiteField.getText().trim();
+
+                // Save changes
+                saveData();
+
+                // Refresh list panel
+                listPanel.removeAll();
+                for (final Entry updatedEntry : entries) {
+                    addEntryToListPanel(listPanel, updatedEntry);
+                }
+
+                listPanel.revalidate();
+                listPanel.repaint();
+            }
         });
 
+        // Delete button action
+        deleteButton.addActionListener(e -> {
+            final int confirmation = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete this entry?",
+                    "Confirm Deletion",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (confirmation == JOptionPane.YES_OPTION) {
+                entries.remove(entry);
+                listPanel.remove(entryPanel);
+                listPanel.revalidate();
+                listPanel.repaint();
+                saveData();
+            }
+        });
+
+        buttonsPanel.add(editButton);
+        buttonsPanel.add(deleteButton);
+
         entryPanel.add(label, BorderLayout.CENTER);
-        entryPanel.add(deleteButton, BorderLayout.EAST);
+        entryPanel.add(buttonsPanel, BorderLayout.EAST);
 
         listPanel.add(entryPanel);
         listPanel.revalidate();
@@ -204,9 +265,9 @@ public class Main {
     }
 
     private static class Entry {
-        private final String name;
-        private final String description;
-        private final String website;
+        private String name;
+        private String description;
+        private String website;
 
         public Entry(String name, String description, String website) {
             this.name = name;

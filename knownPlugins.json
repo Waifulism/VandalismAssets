@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "name": "NoCheatPlus",
+    "description": "Detect and fight the exploitation of various flaws/bugs in Minecraft!",
+    "website": "https://www.spigotmc.org/resources/nocheatplus.26/"
+  },
+  {
+    "name": "GrimAC",
+    "description": "Fully async, multithreaded, predictive, open source, 3.01 reach, 1.005 timer, 0.01% speed, 99.99% antikb, \"bypassable\" 1.8-1.20 anticheat.",
+    "website": "https://grim.ac/"
+  },
+  {
+    "name": "AAC",
+    "description": "AAC is a powerful anti-cheat plugin for Minecraft servers.",
+    "website": "https://www.spigotmc.org/resources/anticheataddition.33590/"
+  },
+  {
+    "name": "Intave",
+    "description": "One of the most trusted Minecraft serverside cheating solutions.",
+    "website": "https://intave.ac/frontpage"
+  },
+  {
+    "name": "Polar",
+    "description": "Polar is a SaaS cheat prevention software aimed at limiting cheaters from gaining an unfair advantage on your Minecraft server.",
+    "website": "https://polar.top/"
+  },
+  {
+    "name": "Horizon",
+    "description": "Powerful Cheat Detection in New Era",
+    "website": "https://www.spigotmc.org/resources/horizon-powerful-cheat-detection-in-new-era-1-8-1-12-1-13-1-14-1-20.65830/"
+  },
+  {
+    "name": "WorldGuard",
+    "description": "WorldGuard lets you and players guard areas of land against griefers and undesirables as well as tweak and disable various gameplay features of Minecraft.",
+    "website": "https://dev.bukkit.org/projects/worldguard"
+  }
+]
